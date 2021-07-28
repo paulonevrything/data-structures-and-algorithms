@@ -28,6 +28,8 @@ class LinkedList {
 
         Node newNode = new Node(value);
 
+        newNode.setPrev(this.tail);
+
         this.tail.setNext(newNode);
 
         this.tail = newNode;
@@ -42,6 +44,8 @@ class LinkedList {
         Node newNode = new Node(value);
 
         newNode.setNext(this.head);
+
+        this.head.setPrev(newNode);
 
         this.head = newNode;
 
@@ -71,13 +75,17 @@ class LinkedList {
 
         Node newNode = new Node(value);
 
-        Node currentNode = getCurrentNode(index);
+        Node leader = traverseToIndex(index);
 
-        Node nextNode = currentNode.getNext();
+        Node follower = leader.getNext();
 
-        currentNode.setNext(newNode);
+        leader.setNext(newNode);
 
-        newNode.setNext(nextNode);
+        newNode.setPrev(leader);
+
+        newNode.setNext(follower);
+
+        follower.setPrev(newNode);
 
         this.length++;
 
@@ -100,18 +108,18 @@ class LinkedList {
             return;
         }
 
-        Node currentNode = getCurrentNode(index);
+        Node followingNodes = traverseToIndex(index);
 
-        Node nodeAfterDeletedNode = currentNode.getNext();
+        Node nodeAfterDeletedNode = followingNodes.getNext();
 
-        currentNode.setNext(nodeAfterDeletedNode);
+        followingNodes.setNext(nodeAfterDeletedNode);
 
         this.length--;
 
         printList();
     }
 
-    private Node getCurrentNode(int index) {
+    private Node traverseToIndex(int index) {
 
         Node currentNode = this.head;
 
@@ -142,6 +150,7 @@ class Node {
 
     private int value;
     private Node next;
+    private Node prev;
 
     public int getValue() {
         return value;
@@ -151,13 +160,22 @@ class Node {
         return next;
     }
 
+    public Node getPrev() {
+        return prev;
+    }
+
     Node(int value) {
         this.value = value;
         this.next = null;
+        this.prev = null;
     }
 
     public void setNext(Node newNode) {
         this.next = newNode;
+    }
+
+    public void setPrev(Node node) {
+        this.prev = node;
     }
 
 }
