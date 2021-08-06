@@ -1,4 +1,4 @@
-package HackerRank;
+package HackerRank.ParkingDilemma;
 
 import java.util.*;
 
