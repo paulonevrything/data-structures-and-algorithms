@@ -14,7 +14,7 @@ public class Factorial {
         System.out.println();
 
         System.out.println("============ Normal Factorial result here ===========");
-        System.out.println("5! is equals:" + normalFactorial(5));
+        System.out.println("5! is equals:" + iterativeFactorial(5));
     }
 
     public static int recursiveFctorial(int number) {
@@ -28,7 +28,7 @@ public class Factorial {
 
     }
 
-    public static int normalFactorial(int number) {
+    public static int iterativeFactorial(int number) {
 
         for (int i = number - 1; i > 1; i--) {
 
